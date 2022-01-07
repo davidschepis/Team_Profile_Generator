@@ -74,7 +74,7 @@ function managerPrompt() {
             addIntern();
         }
         else {
-            generateWebpage()
+            generateWebpage();
         }
     }).catch((error) => {
         console.log(error);
@@ -120,7 +120,7 @@ function addEngineer() {
             addIntern();
         }
         else {
-            generateWebpage()
+            generateWebpage();
         }
     }).catch((error) => {
         console.log(error);
@@ -166,7 +166,7 @@ function addIntern() {
             addIntern();
         }
         else {
-            generateWebpage()
+            generateWebpage();
         }
     }).catch((error) => {
         console.log(error);
@@ -184,11 +184,11 @@ function generateWebpage() {
 function generateHTML() {
     let htmlOutput = "";
     htmlOutput += getHTMLBeginning();
-    htmlOutput += '<section id="headerbg" class="container-fluid">';
+    htmlOutput += '<section id="headerbg" class="container-fluid bg-info">';
     htmlOutput += '<div class="row text-center">';
     htmlOutput += '<h1 id="teamHeader">My team</h1></div>';
     htmlOutput += '</section>';
-    htmlOutput += '<section id="mainSection" class="container-fluid">';
+    htmlOutput += '<section id="mainSection" class="container">';
     htmlOutput += '<div class="row">';
     htmlOutput += generateCards();
     htmlOutput += '</div>';
@@ -201,9 +201,8 @@ function generateHTML() {
 function generateCSS() {
     let cssOutput = "";
     cssOutput += "#teamHeader {font-size: 80px; color:white;}";
-    cssOutput += "#headerbg {background-color: blue; height: 120px;}";
+    cssOutput += "#headerbg {height: 120px;}";
     cssOutput += ".card img {height:2rem; width:2rem;}"
-
     writeToFile("./dist/style.css", cssOutput);
 }
 
@@ -230,16 +229,17 @@ function getHTMLEnding() {
 function generateCards() {
     let cards = "";
     for (const i of empArray) {
-        cards += '<div class="col">';
-        cards += '<div class="card shadow h-100 m-5" style="width: 24rem;">'
-        cards += `<h5 class="card-header text-center bg-primary text-white">${i.getRole()}  <img src="${i.getImage()}" alt="Employee Image"></h5>`;
-        cards += '<div class="card-body">';
-        cards += `<h6 class="card-subtitle mb-2 text-muted text-center">${i.getName()}</h6>`;
-        cards += '<ul class="list-group list-group-flush">';
-        cards += `<li class="list-group-item">ID: ${i.getId()}</li>`;
-        cards += `<li class="list-group-item">Email: <a href="mailto:${i.getEmail()}">${i.getEmail()}</a></li>`;
-        cards += `<li class="list-group-item">${getSpecifics(i)}</li>`;
-        cards += "</p></div></div></div>";
+        cards += '<div class="col-xl-4 col-lg-6 col-12 mb-5">';
+        cards += '<div class="card shadow h-100 m-5" style="width: 24rem;">';
+        cards += '<div class="card-header bg-info text-white text-center">';
+        cards += `<h5>${i.getName()}</h5>`;
+        cards += `<h5>${i.getRole()}     <img src="${i.getImage()}" alt="Employee Image"></h5>`;
+        cards += "</div>";
+        cards += '<ol class="list-group list-group-flush">';
+        cards += `<li class="list-group-item"><h6>ID: ${i.getId()}</h6></li>`;
+        cards += `<li class="list-group-item"><h6>Email: <a href="mailto:${i.getEmail()}">${i.getEmail()}</a></h6></li>`;
+        cards += `<li class="list-group-item"><h6>${getSpecifics(i)}</h6></li>`;
+        cards += "</ol></div></div>";
     }
     return cards;
 }
@@ -263,14 +263,5 @@ function writeToFile(fileName, data) {
         error ? console.error(error) : console.log(`Writing to ${fileName} was successful!`)
     );
 }
-
-
-
-
-
-
-
-
-
 
 init();
