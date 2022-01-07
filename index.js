@@ -1,5 +1,4 @@
 //globals
-const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
@@ -168,6 +167,9 @@ function addIntern() {
         }
         else {
             generateHTML();
+            console.log("HTML generated");
+            generateCSS();
+            console.log("CSS generated");
         }
     }).catch((error) => {
         console.log(error);
@@ -176,9 +178,54 @@ function addIntern() {
 
 //This function generates the HTML file
 function generateHTML() {
-    
+    let htmlOutput = "";
+    htmlOutput += getHTMLBeginning();
+    htmlOutput += '<section class="container-fluid text-center">';
+    htmlOutput += '<h1 id="teamHeader">My team</h1>';
+    htmlOutput += '</section>';
+
+
+
+
+    htmlOutput += getHTMLEnding();
+    writeToFile("index.html", htmlOutput);
 }
 
+//This function generates the CSS file
+function generateCSS() {
+    let cssOutput = "";
+    cssOutput += "#teamHeader {font-size: 40px;}";
+
+
+
+    writeToFile("style.css", cssOutput);
+}
+
+//This function returns the first "half" of an html page, ending the body tag
+function getHTMLBeginning() {
+    let output = "";
+    output += '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    output += '<title>My team</title>';
+    output += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">';
+    output += '<link rel="stylesheet" href="style.css">';
+    output += "</head><body>";
+    return output;
+}
+
+//This function returns the second "half of an html page, starting at the closing body tag"
+function getHTMLEnding() {
+    let output = "";
+    output += '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>';
+    output += '</body></html>';
+    return output;
+}
+
+//This function writes data to filename
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (error) =>
+        error ? console.error(error) : console.log(`Writing to ${fileName} was successful!`)
+    );
+}
 
 
 
