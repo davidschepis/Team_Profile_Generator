@@ -203,6 +203,7 @@ function generateCSS() {
     cssOutput += "#teamHeader {font-size: 80px; color:white;}";
     cssOutput += "#headerbg {height: 120px;}";
     cssOutput += ".card img {height:2rem; width:2rem;}"
+    cssOutput += ".card a {text-decoration: none;}"
     writeToFile("./dist/style.css", cssOutput);
 }
 
