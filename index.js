@@ -74,7 +74,7 @@ function managerPrompt() {
             addIntern();
         }
         else {
-            generateHTML();
+            generateWebpage()
         }
     }).catch((error) => {
         console.log(error);
@@ -120,7 +120,7 @@ function addEngineer() {
             addIntern();
         }
         else {
-            generateHTML();
+            generateWebpage()
         }
     }).catch((error) => {
         console.log(error);
@@ -166,39 +166,45 @@ function addIntern() {
             addIntern();
         }
         else {
-            generateHTML();
-            console.log("HTML generated");
-            generateCSS();
-            console.log("CSS generated");
+            generateWebpage()
         }
     }).catch((error) => {
         console.log(error);
     });
 }
 
+function generateWebpage() {
+    generateHTML();
+    console.log("HTML generated");
+    generateCSS();
+    console.log("CSS generated");
+}
+
 //This function generates the HTML file
 function generateHTML() {
     let htmlOutput = "";
     htmlOutput += getHTMLBeginning();
-    htmlOutput += '<section class="container-fluid text-center">';
-    htmlOutput += '<h1 id="teamHeader">My team</h1>';
+    htmlOutput += '<section id="headerbg" class="container-fluid">';
+    htmlOutput += '<div class="row text-center">';
+    htmlOutput += '<h1 id="teamHeader">My team</h1></div>';
     htmlOutput += '</section>';
-
-
-
-
+    htmlOutput += '<section id="mainSection" class="container-fluid">';
+    htmlOutput += '<div class="row">';
+    htmlOutput += generateCards();
+    htmlOutput += '</div>';
+    htmlOutput += '</section>';
     htmlOutput += getHTMLEnding();
-    writeToFile("index.html", htmlOutput);
+    writeToFile("./dist/index.html", htmlOutput);
 }
 
 //This function generates the CSS file
 function generateCSS() {
     let cssOutput = "";
-    cssOutput += "#teamHeader {font-size: 40px;}";
+    cssOutput += "#teamHeader {font-size: 80px; color:white;}";
+    cssOutput += "#headerbg {background-color: blue; height: 120px;}";
+    cssOutput += ".card img {height:2rem; width:2rem;}"
 
-
-
-    writeToFile("style.css", cssOutput);
+    writeToFile("./dist/style.css", cssOutput);
 }
 
 //This function returns the first "half" of an html page, ending the body tag
@@ -218,6 +224,37 @@ function getHTMLEnding() {
     output += '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>';
     output += '</body></html>';
     return output;
+}
+
+//This function returns a bootstrap card for each employee
+function generateCards() {
+    let cards = "";
+    for (const i of empArray) {
+        cards += '<div class="col">';
+        cards += '<div class="card shadow h-100 m-5" style="width: 24rem;">'
+        cards += `<h5 class="card-header text-center bg-primary text-white">${i.getRole()}  <img src="${i.getImage()}" alt="Employee Image"></h5>`;
+        cards += '<div class="card-body">';
+        cards += `<h6 class="card-subtitle mb-2 text-muted text-center">${i.getName()}</h6>`;
+        cards += '<ul class="list-group list-group-flush">';
+        cards += `<li class="list-group-item">ID: ${i.getId()}</li>`;
+        cards += `<li class="list-group-item">Email: <a href="mailto:${i.getEmail()}">${i.getEmail()}</a></li>`;
+        cards += `<li class="list-group-item">${getSpecifics(i)}</li>`;
+        cards += "</p></div></div></div>";
+    }
+    return cards;
+}
+
+//This function checks what kind of employee they are before returning their role specific data
+function getSpecifics(emp) {
+    if (emp.getRole() === "Manager") {
+        return `Office#: ${emp.getOfficeNumber()}`;
+    }
+    else if (emp.getRole() === "Engineer") {
+        return `Github: <a href="https://www.github.com/${emp.getGithub()}">${emp.getGithub()}</a>`;
+    }
+    else {
+        return `School: ${emp.getSchool()}`;
+    }
 }
 
 //This function writes data to filename
