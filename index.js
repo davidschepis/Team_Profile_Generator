@@ -4,6 +4,7 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const Inquirer = require("inquirer");
+const fs = require("fs");
 const empArray = [];
 
 //questions for prompt
@@ -65,10 +66,117 @@ function managerPrompt() {
             choices: ["Add engineer?", "Add intern?", "Finish"],
         }
     ]).then((response) => {
-        console.log(response);
+        const manager = new Manager(response.name, response.id, response.email, response.officeNum);
+        empArray.push(manager);
+        if (response.checkContinue === "Add engineer?") {
+            addEngineer();
+        }
+        else if (response.checkContinue === "Add intern?") {
+            addIntern();
+        }
+        else {
+            generateHTML();
+        }
     }).catch((error) => {
         console.log(error);
     });
+}
+
+//This function handles adding an engineer
+function addEngineer() {
+    Inquirer.prompt([
+        {
+            type: "input",
+            message: engineerQuestions[0],
+            name: "name",
+        },
+        {
+            type: "input",
+            message: engineerQuestions[1],
+            name: "id",
+        },
+        {
+            type: "input",
+            message: engineerQuestions[2],
+            name: "email",
+        },
+        {
+            type: "input",
+            message: engineerQuestions[3],
+            name: "github",
+        },
+        {
+            type: "list",
+            message: addQuestions,
+            name: "checkContinue",
+            choices: ["Add engineer?", "Add intern?", "Finish"],
+        }
+    ]).then((response) => {
+        const engineer = new Engineer(response.name, response.id, response.email, response.github);
+        empArray.push(engineer);
+        if (response.checkContinue === "Add engineer?") {
+            addEngineer();
+        }
+        else if (response.checkContinue === "Add intern?") {
+            addIntern();
+        }
+        else {
+            generateHTML();
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+//This function handles adding an intern
+function addIntern() {
+    Inquirer.prompt([
+        {
+            type: "input",
+            message: internQuestions[0],
+            name: "name",
+        },
+        {
+            type: "input",
+            message: internQuestions[1],
+            name: "id",
+        },
+        {
+            type: "input",
+            message: internQuestions[2],
+            name: "email",
+        },
+        {
+            type: "input",
+            message: internQuestions[3],
+            name: "school",
+        },
+        {
+            type: "list",
+            message: addQuestions,
+            name: "checkContinue",
+            choices: ["Add engineer?", "Add intern?", "Finish"],
+        }
+    ]).then((response) => {
+        const intern = new Intern(response.name, response.id, response.email, response.school);
+        empArray.push(intern);
+        if (response.checkContinue === "Add engineer?") {
+            addEngineer();
+        }
+        else if (response.checkContinue === "Add intern?") {
+            addIntern();
+        }
+        else {
+            generateHTML();
+        }
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+//This function generates the HTML file
+function generateHTML() {
+    
 }
 
 
