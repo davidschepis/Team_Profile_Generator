@@ -1,5 +1,5 @@
 # Team_Profile_Generator
-[![License]()]()
+
 
 ## Description
 Creates a website showcasing a team of workers, with details provided by the user on the command line
@@ -16,13 +16,27 @@ Creates a website showcasing a team of workers, with details provided by the use
 - [Questions](#questions)
 
  ## Links
-https://github.com/davidschepis/Team_Profile_Generator
+Github Repo: https://github.com/davidschepis/Team_Profile_Generator
 
-
+Video: https://drive.google.com/file/d/1shN-PlQYjhwolVMfpMjhg_FjRb4dukT0/view
 
  ## Example
 
+Gif Example
 
+![Screenshot](./assets/images/example.gif)
+
+Screenshot1:
+
+![Screenshot](./assets/images/screenshot1.png)
+
+Screenshot2:
+
+![Screenshot](./assets/images/screenshot2.png)
+
+Screenshot3:
+
+![Screenshot](./assets/images/screenshot3.png)
 
  ## Installation
 To install necessary dependencies, run the following command:
@@ -32,7 +46,7 @@ npm install
 ```
 
  ## Usage
-Allows an unlimited amount of engineers and interns, but only a singular manager
+Allows an unlimited amount of engineers and interns, but only a single manager
 
  ## License
 This project is not licensed
