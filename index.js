@@ -251,7 +251,7 @@ function getSpecifics(emp) {
         return `Office#: ${emp.getOfficeNumber()}`;
     }
     else if (emp.getRole() === "Engineer") {
-        return `Github: <a href="https://www.github.com/${emp.getGithub()}">${emp.getGithub()}</a>`;
+        return `Github: <a href="https://www.github.com/${emp.getGithub()}" target="_blank">${emp.getGithub()}</a>`;
     }
     else {
         return `School: ${emp.getSchool()}`;
