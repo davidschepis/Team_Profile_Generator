@@ -202,15 +202,15 @@ function generateCSS() {
     let cssOutput = "";
     cssOutput += "#teamHeader {font-size: 80px; color:white;}";
     cssOutput += "#headerbg {height: 120px;}";
-    cssOutput += ".card img {height:2rem; width:2rem;}"
-    cssOutput += ".card a {text-decoration: none;}"
+    cssOutput += ".card img {height:2rem; width:2rem;}";
+    cssOutput += ".card a {text-decoration: none;}";
     writeToFile("./dist/style.css", cssOutput);
 }
 
 //This function returns the first "half" of an html page, ending the body tag
 function getHTMLBeginning() {
     let output = "";
-    output += '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    output += '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">';
     output += '<title>My team</title>';
     output += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">';
     output += '<link rel="stylesheet" href="style.css">';
@@ -238,7 +238,7 @@ function generateCards() {
         cards += "</div>";
         cards += '<ol class="list-group list-group-flush">';
         cards += `<li class="list-group-item"><h6>ID: ${i.getId()}</h6></li>`;
-        cards += `<li class="list-group-item"><h6>Email: <a href="mailto:${i.getEmail()}">${i.getEmail()}</a></h6></li>`;
+        cards += `<li class="list-group-item"><h6>Email: <a href="mailto:${i.getEmail()}" target="_blank">${i.getEmail()}</a></h6></li>`;
         cards += `<li class="list-group-item"><h6>${getSpecifics(i)}</h6></li>`;
         cards += "</ol></div></div>";
     }
